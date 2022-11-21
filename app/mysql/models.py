@@ -1,6 +1,5 @@
-from sqlalchemy import Column, Integer, String, Sequence
+from sqlalchemy import Column, Enum, Integer, Boolean, String, Sequence
 from app.mysql.base import Base
-from sqlalchemy import Enum
 
 class Species(enum.Enum):
   dilophosaurus = 'dilophosaurus'
@@ -10,6 +9,7 @@ class Species(enum.Enum):
   parasaulophus = 'parasaulophus'
   galliminus = 'galliminus'
   triceratops = 'triceratops'
+
 class Gender(enum.Enum):
   male = 'male'
   female = 'female'
@@ -37,4 +37,47 @@ class Dinosaur(Base):
       self.weigth,
       self.gender,
       self.dangerousness
+    )
+
+class Enclosure(Base):
+  __tablename__ = "enclosure"
+  id = Column(Integer, Sequence("enclosure_id_seq"), primary_key=True)
+  name = Column(String(50))
+  status = Column(Boolean)
+
+  def __repr__(self) -> str:
+    return "<Recinto(id='%d', name='%s', status='%r')>" % (
+      self.id,
+      self.name,
+      self.status,
+    )
+
+class OffRoad(Base):
+  __tablename__ = "offroad"
+  id = Column(Integer, Sequence("offroad_id_seq"), primary_key=True)
+  on_route = Column(Boolean)
+  n_visitors = Column(Integer)
+  security_system = Column(Boolean)
+
+  def __repr__(self) -> str:
+    return "<OffRoad(id='%d', on_route='%r', n_visitors='%s', security_system='%r')>" % (
+      self.id,
+      self.on_route,
+      self.n_visitors,
+      self.security_system,
+    )
+
+class AlarmEnum(enum.Enum):
+    maximum = 1
+    average = 2
+    low = 3
+    normal = 4
+
+class Alarm(Base):
+  __tablename__ = "alarm"
+  status = Column(Enum(AlarmEnum))
+
+  def __repr__(self) -> str:
+    return "<Alarm(status='%s')>" % (
+      self.status,
     )
