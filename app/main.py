@@ -16,3 +16,7 @@ def initialize() -> None:
 
 app = FastAPI()
 initialize()
+
+controller = Controllers()
+
+controller.create_enclosure("pepito", True)
