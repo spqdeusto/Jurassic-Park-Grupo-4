@@ -1,3 +1,4 @@
+import enum
 from sqlalchemy import Column, Enum, Integer, Boolean, String, Sequence, ForeignKey
 from app.mysql.base import Base
 from sqlalchemy.orm import relationship
@@ -79,7 +80,7 @@ class AlarmEnum(enum.Enum):
 
 class Alarm(Base):
   __tablename__ = "alarm"
-  status = Column(Enum(AlarmEnum))
+  status = Column(Enum(AlarmEnum), primary_key=True)
 
   def __repr__(self) -> str:
     return "<Alarm(status='%s')>" % (
