@@ -72,10 +72,10 @@ class OffRoad(Base):
     )
 
 class AlarmEnum(enum.Enum):
-    maximum = 1
-    average = 2
-    low = 3
-    normal = 4
+    maximum = 'maximum'
+    average = 'average'
+    low = 'low'
+    normal = 'normal'
 
 class Alarm(Base):
   __tablename__ = "alarm"
