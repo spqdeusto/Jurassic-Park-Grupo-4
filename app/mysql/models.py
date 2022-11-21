@@ -31,14 +31,15 @@ class Dinosaur(Base):
   enclosure_id = Column(Integer, ForeignKey("enclosure.id"))
 
   def __repr__(self) -> str:
-    return "<(id= '%d', name='%s', specie='%s', age='%d', weigth='%d', gender='%s', dangerousness='%s')>" % (
+    return "<(id= '%d', name='%s', specie='%s', age='%d', weigth='%d', gender='%s', dangerousness='%s', enclosure_id='%d')>" % (
       self.id,
       self.name,
       self.species,
       self.age,
       self.weigth,
       self.gender,
-      self.dangerousness
+      self.dangerousness,
+      self.enclosure_id
     )
 
 class Enclosure(Base):
