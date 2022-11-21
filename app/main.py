@@ -21,3 +21,5 @@ controller = Controllers()
 
 controller.create_enclosure("pepito", True)
 controller.create_dinosaur()
+controller.create_alarm()
+controller.create_offroad()

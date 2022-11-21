@@ -33,3 +33,31 @@ class Controllers:
       session.close()
   
     return {"status": "ok"}
+  
+  def create_offroad(self):
+    """
+    Creates new user in  the database
+    """
+    body_row = mysql_models.OffRoad(on_route = True, n_visitors = 100, security_system= False)
+    
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      session.add(body_row)
+      session.commit()
+      session.close()
+  
+    return {"status": "ok"}
+
+  def create_alarm(self):
+    """
+    Creates new user in  the database
+    """
+    body_row = mysql_models.Alarm(status = "maximum")
+    
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      session.add(body_row)
+      session.commit()
+      session.close()
+  
+    return {"status": "ok"}
