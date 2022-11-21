@@ -26,18 +26,18 @@ class Dinosaur(Base):
   name = Column(String(50))
   species = Column(Enum(Species))
   age = Column(Integer)
-  weigth = Column(Integer)
+  weight = Column(Integer)
   gender = Column(Enum(Gender))
   dangerousness = Column(Enum(Dangerousness))
   enclosure_id = Column(Integer, ForeignKey("enclosure.id"))
 
   def __repr__(self) -> str:
-    return "<(id= '%d', name='%s', specie='%s', age='%d', weigth='%d', gender='%s', dangerousness='%s', enclosure_id='%d')>" % (
+    return "<(id= '%d', name='%s', specie='%s', age='%d', weight='%d', gender='%s', dangerousness='%s', enclosure_id='%d')>" % (
       self.id,
       self.name,
       self.species,
       self.age,
-      self.weigth,
+      self.weight,
       self.gender,
       self.dangerousness,
       self.enclosure_id
