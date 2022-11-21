@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Enum, Integer, Boolean, String, Sequence
+from sqlalchemy import Column, Enum, Integer, Boolean, String, Sequence, ForeignKey
 from app.mysql.base import Base
+from sqlalchemy.orm import relationship
 
 class Species(enum.Enum):
   dilophosaurus = 'dilophosaurus'
@@ -27,6 +28,7 @@ class Dinosaur(Base):
   weigth = Column(Integer)
   gender = Column(Enum(Gender))
   dangerousness = Column(Enum(Dangerousness))
+  enclosure_id = Column(Integer, ForeignKey("enclosure.id"))
 
   def __repr__(self) -> str:
     return "<(id= '%d', name='%s', specie='%s', age='%d', weigth='%d', gender='%s', dangerousness='%s')>" % (
@@ -44,6 +46,7 @@ class Enclosure(Base):
   id = Column(Integer, Sequence("enclosure_id_seq"), primary_key=True)
   name = Column(String(50))
   status = Column(Boolean)
+  dinosaur = relationship("Dinosaur")
 
   def __repr__(self) -> str:
     return "<Recinto(id='%d', name='%s', status='%r')>" % (
