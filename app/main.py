@@ -20,3 +20,4 @@ initialize()
 controller = Controllers()
 
 controller.create_enclosure("pepito", True)
+controller.create_dinosaur()

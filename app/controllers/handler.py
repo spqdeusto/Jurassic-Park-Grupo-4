@@ -23,4 +23,13 @@ class Controllers:
       session.close()
   
     return {"status": "ok"}
+
+  def create_dinosaur(self):
+    body_row = mysql_models.Dinosaur(name="Toby", species="dilophosaurus", age= 16, weight = 100, gender = "male", dangerousness = "peaceful", enclosure_id = 1)
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      session.add(body_row)
+      session.commit()
+      session.close()
   
+    return {"status": "ok"}
