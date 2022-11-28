@@ -19,7 +19,28 @@ initialize()
 
 controller = Controllers()
 
-controller.create_enclosure("pepito", True)
+""" controller.create_enclosure("pepito", True)
+controller.create_specie()
 controller.create_dinosaur()
 controller.create_alarm()
-controller.create_offroad()
+controller.create_offroad() """
+
+@app.post('/specie/create')
+async def create_specie(body: models.Specie): 
+  return controller.create_specieModel(body)
+
+@app.post('/enclosure/create')
+async def create_enclosure(body: models.Enclosure): 
+  return controller.create_enclosureModel(body)
+
+@app.post('/dinosaur/create')
+async def create_dinosaur(body: models.Dinosaur): 
+  return controller.create_dinosaurModel(body)
+
+@app.post('/offRoad/create')
+async def create_offRoad(body: models.OffRoad): 
+  return controller.create_offRoadModel(body)
+
+@app.post('/alarm/create')
+async def create_alarm(body: models.Alarm): 
+  return controller.create_alarmModel(body)

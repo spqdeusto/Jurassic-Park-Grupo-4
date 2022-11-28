@@ -1,13 +1,24 @@
 from pydantic import BaseModel
-#jfdjfsj
-class UserRequest(BaseModel):
+
+class Specie(BaseModel):
   name: str
-  fullname: str
+
+class Dinosaur(BaseModel):
+  name: str
+  specie_id: int
   age: int
+  weight: int
+  gender: str
+  dangerousness: str
+  encosure_id: int
+class Enclosure(BaseModel):
+  name: str
+  status: bool
   
-class DeleteRequest(BaseModel):
-  id: int
-  
-class UpdateRequest(BaseModel):
-  id: int
-  update: UserRequest
+class OffRoad(BaseModel):
+  on_route: bool
+  n_visitors: int
+  security_system: bool
+
+class Alarm(BaseModel):
+  status: str

@@ -3,14 +3,17 @@ from sqlalchemy import Column, Enum, Integer, Boolean, String, Sequence, Foreign
 from app.mysql.base import Base
 from sqlalchemy.orm import relationship
 
-class Species(enum.Enum):
-  dilophosaurus = 'dilophosaurus'
-  trex = 't-rex'
-  velociraptor = 'velociraptor'
-  brachiosaurus = 'brachiosaurus'
-  parasaulophus = 'parasaulophus'
-  galliminus = 'galliminus'
-  triceratops = 'triceratops'
+class Species(Base):
+  __tablename__ = "species"
+  id = Column(Integer, Sequence("spec_id_seq"), primary_key=True)
+  name = Column(String(50))
+  dinosaur = relationship("Dinosaur")
+
+  def __repr__(self) -> str:
+    return "<(id= '%d', name='%s')>" % (
+      self.id,
+      self.name,
+    )
 
 class Gender(enum.Enum):
   male = 'male'
@@ -24,7 +27,7 @@ class Dinosaur(Base):
   __tablename__ = "dinosaurs"
   id = Column(Integer, Sequence("dino_id_seq"), primary_key=True)
   name = Column(String(50))
-  species = Column(Enum(Species))
+  specie_id = Column(Integer, ForeignKey("species.id"))
   age = Column(Integer)
   weight = Column(Integer)
   gender = Column(Enum(Gender))
