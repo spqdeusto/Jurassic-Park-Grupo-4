@@ -10,17 +10,11 @@ class Controllers:
   def __init__(self) -> None:
     pass
   
-  def healthz(self):
-    """
-    Checks server status
-    """
-    return {"status": "ok"}
-  
-  def create_user(self, body: models.UserRequest):
+  def create_enclosure(self, name, status):
     """
     Creates new user in  the database
     """
-    body_row = mysql_models.User(name=body.name, fullname=body.fullname, age=body.age)
+    body_row = mysql_models.Enclosure(name=name, status=status)
     
     db = DatabaseClient(gb.MYSQL_URL)
     with Session(db.engine) as session:
@@ -29,45 +23,106 @@ class Controllers:
       session.close()
   
     return {"status": "ok"}
-  
-  def get_all(self):
-    """
-    Gets all users
-    """
-    db = DatabaseClient(gb.MYSQL_URL)
-    response: list = []
-    with Session(db.engine) as session:
-      response = session.query(mysql_models.User).all()
-      session.close()
-      
-    return response
-  
-  def delete_user(self, id: int):
-    """
-    Deletes user by its UID
-    """
+
+  def create_specie(self):
+    body_row = mysql_models.Dinosaur(name="T-Rex")
     db = DatabaseClient(gb.MYSQL_URL)
     with Session(db.engine) as session:
-      userToBeDeleted = session.query(mysql_models.User).get(id)
-      session.delete(userToBeDeleted)
+      session.add(body_row)
       session.commit()
       session.close()
-      
-    return {"status": "ok"}
-  
-  def update_user(self, body: models.UpdateRequest):
-    """
-    Updates user by its ID
-    """
+
+
+  def create_dinosaur(self):
+    body_row = mysql_models.Dinosaur(name="Toby", species=1, age= 16, weight = 100, gender = "male", dangerousness = "peaceful", enclosure_id = 1)
     db = DatabaseClient(gb.MYSQL_URL)
     with Session(db.engine) as session:
-      user: mysql_models.User = session.query(mysql_models.User).get(body.id)
-      user.name = body.update.name
-      user.fullname = body.update.fullname
-      user.age = body.update.age
-      session.dirty
+      session.add(body_row)
       session.commit()
       session.close()
-      
+  
     return {"status": "ok"}
+  
+  def create_offroad(self):
+    """
+    Creates new user in  the database
+    """
+    body_row = mysql_models.OffRoad(on_route = True, n_visitors = 100, security_system= False)
+    
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      session.add(body_row)
+      session.commit()
+      session.close()
+  
+    return {"status": "ok"}
+
+  def create_alarm(self):
+    """
+    Creates new user in  the database
+    """
+    body_row = mysql_models.Alarm(status = "maximum")
+    
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      session.add(body_row)
+      session.commit()
+      session.close()
+  
+    return {"status": "ok"}
+
+    #-------
+  
+  def create_specieModel(self, body: models.Specie):
+    body_row = mysql_models.Species(name = body.name)
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      session.add(body_row)
+      session.commit()
+      session.close()
+  
+    return {"status": "ok"}
+
+  def create_enclosureModel(self, body: models.Enclosure):
+    body_row = mysql_models.Enclosure(name = body.name, status = body.status)
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      session.add(body_row)
+      session.commit()
+      session.close()
+  
+    return {"status": "ok"}
+
+  def create_dinosaurModel(self, body: models.Dinosaur):
+    body_row = mysql_models.Dinosaur(name=body.name, specie_id=body.specie_id, age= body.weight, weight = body.weight, gender = body.gender, dangerousness = body.dangerousness, enclosure_id = body.encosure_id)
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      session.add(body_row)
+      session.commit()
+      session.close()
+  
+    return {"status": "ok"}
+
+  def create_offRoadModel(self, body: models.OffRoad):
+    body_row = mysql_models.OffRoad(on_route = body.on_route, n_visitors = body.n_visitors, security_system = body.security_system)
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      session.add(body_row)
+      session.commit()
+      session.close()
+
+    return {"status": "ok"}
+
+  def create_alarmModel(self, body: models.Alarm):
+    body_row = mysql_models.Alarm(status = body.status)
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      session.add(body_row)
+      session.commit()
+      session.close()
+
+    return {"status": "ok"}
+
+  
+
   

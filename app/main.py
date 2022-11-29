@@ -15,33 +15,32 @@ def initialize() -> None:
 
 
 app = FastAPI()
-controllers = Controllers()
-
 initialize()
 
-@app.get('/')
-async def index():
-  return "hello Unai"
+controller = Controllers()
 
-@app.get('/healthz')
-async def healthz():
-  return controllers.healthz()
+""" controller.create_enclosure("pepito", True)
+controller.create_specie()
+controller.create_dinosaur()
+controller.create_alarm()
+controller.create_offroad() """
 
-@app.post('/user/create')
-async def create_user(body: models.UserRequest):
-  return controllers.create_user(body)
+@app.post('/specie/create')
+async def create_specie(body: models.Specie): 
+  return controller.create_specieModel(body)
 
-@app.post('/user/delete')
-async def delete_user(body: models.DeleteRequest):
-  return controllers.delete_user(body.id)
-  
-@app.get('/user/get_all')
-async def get_all_users():
-  return controllers.get_all()
+@app.post('/enclosure/create')
+async def create_enclosure(body: models.Enclosure): 
+  return controller.create_enclosureModel(body)
 
-@app.post('/user/update')
-async def update_user(body: models.UpdateRequest):
-  return controllers.update_user(body)
+@app.post('/dinosaur/create')
+async def create_dinosaur(body: models.Dinosaur): 
+  return controller.create_dinosaurModel(body)
 
-# @app.post('/user/create')
-# def createUser():
+@app.post('/offRoad/create')
+async def create_offRoad(body: models.OffRoad): 
+  return controller.create_offRoadModel(body)
+
+@app.post('/alarm/create')
+async def create_alarm(body: models.Alarm): 
+  return controller.create_alarmModel(body)
