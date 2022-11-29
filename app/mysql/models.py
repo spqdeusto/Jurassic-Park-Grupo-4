@@ -28,7 +28,7 @@ class Dinosaur(Base):
   id = Column(Integer, Sequence("dino_id_seq"), primary_key=True)
   name = Column(String(50))
   specie_id = Column(Integer, ForeignKey("species.id"))
-  age = Column(Integer)
+  age = Column(Integer)#a
   weight = Column(Integer)
   gender = Column(Enum(Gender))
   dangerousness = Column(Enum(Dangerousness))

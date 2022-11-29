@@ -1,7 +1,11 @@
+<script setup>
+import HelloWorld from './components/HelloWorld.vue'
+</script>
+
 <template>
-  <q-layout view="hHh LpR fFf" class="bg-brown-4">
-    <q-header class="bg-brown-10 text-grey-9" reveal height-hint="60">
-      <q-toolbar class="GPLAY__toolbar text-grey-6">
+  <q-layout view="hHh LpR fFf" class="JPARK__bg">
+    <q-header class="bg-transparent" reveal height-hint="60">
+      <q-toolbar class="JPARK__toolbar text-grey-6">
         <q-btn
           flat
           dense
@@ -13,14 +17,14 @@
         />
 
         <div class="q-pr-lg" v-if="$q.screen.gt.xs">
-          <img class="GPLAY__logo" src="/img/brand/logo.png">
+          <img class="JPARK__logo" src="/img/brand/logo.png">
         </div>
 
         <q-space />
 
-        <!--<div class="GPLAY__toolbar-input-container row no-wrap">
+        <!--<div class="JPARK__toolbar-input-container row no-wrap">
           <q-input dense outlined square v-model="search" placeholder="Search" class="bg-white col" />
-          <q-btn class="GPLAY__toolbar-input-btn" color="primary" icon="search" unelevated />
+          <q-btn class="JPARK__toolbar-input-btn" color="primary" icon="search" unelevated />
         </div>-->
 
         <q-space />
@@ -30,35 +34,35 @@
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      class="bg-brown-6 text-grey-7"
+      class="JPARK_leftside bg-transparent text-grey-7"
       :width="330"
     >
       <q-list>
-        <q-item clickable class="GPLAY__drawer-link GPLAY__drawer--dinosaurs">
+        <q-item clickable class="JPARK__drawer-link JPARK__drawer--dinosaurs">
           <q-item-section class="dinosaurs-text">
             <q-item-label>Dinosaurs</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable class="GPLAY__drawer-link GPLAY__drawer-link--species">
+        <q-item clickable class="JPARK__drawer-link JPARK__drawer-link--species">
           <q-item-section class="species-text">
             <q-item-label>Species</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable class="GPLAY__drawer-link GPLAY__drawer-link--enclosures">
+        <q-item clickable class="JPARK__drawer-link JPARK__drawer-link--enclosures">
           <q-item-section class="enclosures-text">
             <q-item-label>Enclosures</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable class="GPLAY__drawer-link GPLAY__drawer-link--offroads">
+        <q-item clickable class="JPARK__drawer-link JPARK__drawer-link--offroads">
           <q-item-section class="offroads-text">
             <q-item-label>OffRoads</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable class="GPLAY__drawer-link GPLAY__drawer-link--alarm">
+        <q-item clickable class="JPARK__drawer-link JPARK__drawer-link--alarm">
           <q-item-section class="alarm-text">
             <q-item-label>Alarm</q-item-label>
           </q-item-section>
@@ -70,15 +74,12 @@
       <router-view />
 
       <q-page-sticky expand position="top">
-        <q-toolbar class="GPLAY__sticky bg-brown-8 q-px-xl">
+        <q-toolbar class="JPARK__sticky q-px-xl">
           <q-space />
             <marquee>Bienvenido al panel de Jurassic Park. Esto se trata de una prueba.</marquee>
         </q-toolbar>
+        <HelloWorld  class="bg-brown-6"></HelloWorld>
       </q-page-sticky>
-
-      <q-page-container>
-        hola
-      </q-page-container>
     </q-page-container>
   </q-layout>
 </template>
@@ -105,10 +106,14 @@ export default {
 </script>
 
 <style lang="sass">
-.GPLAY
+.JPARK
   font-family: 'Montserrat', sans-serif
 
+  &__bg
+    background: url(img/brand/bg.jpg)
+
   &__toolbar
+    background: rgb(64 45 39 / 60%)
     height: 120px
 
   &__logo
@@ -122,6 +127,9 @@ export default {
     border-radius: 0
     max-width: 60px
     width: 100%
+
+  &__leftside
+    background: rgb(64 45 39 / 38%)
 
   &__drawer-item
     padding: 6px 12px 6px 23px
@@ -139,8 +147,12 @@ export default {
     min-height: 49px
     //border: 3px solid black
     //box-shadow: 0 0 0 4px #ffff01
-    color: white
+    color: #402d27
     font-size: 16px
+    border: 6px solid #402d27
+    margin: 15px
+    font-weight: bold
+    border-radius: 5px
 
   &__sticky-help
     border: 1px solid #ccc
@@ -151,4 +163,7 @@ export default {
     padding-left: 17px
     padding-right: 17px
     border: 1px solid #ccc
+
+.q-drawer
+  background: transparent!important
 </style>

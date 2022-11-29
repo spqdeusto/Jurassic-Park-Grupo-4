@@ -41,6 +41,22 @@ controller.create_dinosaur()
 controller.create_alarm()
 controller.create_offroad() """
 
+@app.get('/dinosaur/get_all')
+async def get_Dinosaurs():
+  return controller.get_Dinosaurs()
+
+@app.get('/enclosure/get_all')
+async def get_Enclosures():
+  return controller.get_Enclosures()
+
+@app.get('/offRoad/get_all')
+async def get_offRoads():
+  return controller.get_OffRoads()
+
+@app.get('/alarm/get_all')
+async def get_Alarms():
+  return controller.get_Alarms()
+
 @app.post('/specie/create')
 async def create_specie(body: models.Specie): 
   return controller.create_specieModel(body)
