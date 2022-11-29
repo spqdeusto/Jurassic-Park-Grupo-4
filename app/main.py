@@ -44,3 +44,7 @@ async def create_offRoad(body: models.OffRoad):
 @app.post('/alarm/create')
 async def create_alarm(body: models.Alarm): 
   return controller.create_alarmModel(body)
+
+@app.get('/dinosaur/get_all')
+async def get_all_dinosaurs():
+  return controller.get_Dinosaurs()

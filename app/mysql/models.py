@@ -1,8 +1,9 @@
 import enum
 from sqlalchemy import Column, Enum, Integer, Boolean, String, Sequence, ForeignKey
 from app.mysql.base import Base
-<<<<<<< HEAD
 from sqlalchemy import Enum
+from sqlalchemy.orm import relationship
+
 
 class Species(enum.Enum):
   dilophosaurus = 'dilophosaurus'
@@ -39,9 +40,7 @@ class Dinosaur(Base):
       self.weigth,
       self.gender,
       self.dangerousness
-=======
-from sqlalchemy.orm import relationship
-
+    )
 class Species(Base):
   __tablename__ = "species"
   id = Column(Integer, Sequence("spec_id_seq"), primary_key=True)
@@ -127,5 +126,4 @@ class Alarm(Base):
   def __repr__(self) -> str:
     return "<Alarm(status='%s')>" % (
       self.status,
->>>>>>> main
     )
