@@ -77,6 +77,7 @@
           Esto es una prueba
         </q-toolbar>
       </q-page-sticky>
+      Prueba
     </q-page-container>
   </q-layout>
 </template>
@@ -110,7 +111,7 @@ import { ref } from 'vue'
   &__sticky
     min-height: 49px
     border-bottom: 1px solid rgba(0,0,0,0.12)
-    background: #d50000!important
+    background: #fe0000!important
 
   &__sticky-help
     border: 1px solid #ccc
@@ -127,5 +128,6 @@ import { ref } from 'vue'
       padding-left: 80px
       color: white
       font-size: 20px
+      font-weight: 700
       height: 70px
 </style>
