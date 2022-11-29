@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 from typing import Union
 from app.controllers.handler import Controllers
 from app.mysql.mysql import DatabaseClient
@@ -15,6 +17,20 @@ def initialize() -> None:
 
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["POST", "GET"],
+		allow_headers=["*"],
+    max_age=3600,
+)
+
 initialize()
 
 controller = Controllers()

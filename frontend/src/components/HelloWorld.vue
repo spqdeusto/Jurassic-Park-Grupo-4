@@ -18,6 +18,29 @@ defineProps({
   </div>
 </template>
 
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'Home',
+  data () {
+    return {
+      dinosaurs: []
+    }
+  },
+  methods: {
+    async getDinosaurs () {
+      const response = await axios.get('http://localhost:8000/dinosaur/get_all')
+      this.dinosaurs = response.data
+      console.log(this.dinosaurs)
+    }
+  },
+  created () {
+    this.getDinosaurs()
+  }
+}
+</script>
+
 <style scoped>
 h1 {
   font-weight: 500;

@@ -123,6 +123,42 @@ class Controllers:
 
     return {"status": "ok"}
 
+  def get_Dinosaurs(self):
+    db = DatabaseClient(gb.MYSQL_URL)
+    response: list = []
+    with Session(db.engine) as session:
+      response = session.query(mysql_models.Dinosaur).all()
+      session.close()
+      
+    return response
+
+  def get_Enclosures(self):
+    db = DatabaseClient(gb.MYSQL_URL)
+    response: list = []
+    with Session(db.engine) as session:
+      response = session.query(mysql_models.Enclosure).all()
+      session.close()
+      
+    return response
+
+  def get_OffRoads(self):
+    db = DatabaseClient(gb.MYSQL_URL)
+    response: list = []
+    with Session(db.engine) as session:
+      response = session.query(mysql_models.OffRoad).all()
+      session.close()
+      
+    return response
+  
+  def get_Alarms(self):
+    db = DatabaseClient(gb.MYSQL_URL)
+    response: list = []
+    with Session(db.engine) as session:
+      response = session.query(mysql_models.Alarm).all()
+      session.close()
+      
+    return response
+
   
 
   
