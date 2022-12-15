@@ -10,7 +10,8 @@ class Dinosaur(BaseModel):
   weight: int
   gender: str
   dangerousness: str
-  encosure_id: int
+  enclosure_id: int
+  
 class Enclosure(BaseModel):
   name: str
   status: bool
