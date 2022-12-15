@@ -9,11 +9,13 @@
         /><br>
 
         <span>Specie</span><br>
-        <input 
-          v-model="specie_id"
-          type="number"
-          placeholder="Introduce la especie del dinosaurio" 
-        /><br>
+        <select required name="species" id="species" v-model="specie_id">
+          <option v-for="specie in species" :value="specie">
+            {{ specie.name }}
+          </option>
+<!--           <option value="male">Male</option>
+          <option value="female">Female</option> -->
+        </select>
 
         <span>Age</span><br>
         <input 
@@ -52,30 +54,31 @@
 
   <script>
 import axios from 'axios';
-const axiosInstance = axios.create({
+/*const axiosInstance = axios.create({
   headers: {
     "Access-Control-Allow-Origin":"*"
   }
-});
+}); */
 
     export default {
       data() {
         return {
           name: "",
-          specie_id: 0,
+          specie_id: {},
           gender: "",
           age: 0,
           weight: 0,
           dangerousness: "",
           enclosure_id: 1,
+          species: [],
         };
       },
       methods: {
         submitForm: function () {
-          axiosInstance.post(
+          axios.post(
             "http://localhost:8000/dinosaur/create",
             {name: this.name,
-            specie_id: this.specie_id,
+            specie_id: this.specie_id.id,
             age: this.age,
             weight: this.weight,
             gender: this.gender,
@@ -85,9 +88,17 @@ const axiosInstance = axios.create({
             this.response = JSON.stringify(response);
             console.log(response);
           });
+        },
+        async getSpecies () {
+          const response = await axios.get('http://localhost:8000/specie/get_all')
+          this.species = response.data
+          console.log(this.species)
         }
-      }
-        };
+        },
+        created () {
+          this.getSpecies()
+        }
+      };
   </script>
   <style>
 
