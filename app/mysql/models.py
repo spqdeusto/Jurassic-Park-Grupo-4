@@ -3,7 +3,7 @@ from sqlalchemy import Column, Enum, Integer, Boolean, String, Sequence, Foreign
 from app.mysql.base import Base
 from sqlalchemy.orm import relationship
 
-class Species(Base):
+class Specie(Base):
   __tablename__ = "species"
   id = Column(Integer, Sequence("spec_id_seq"), primary_key=True)
   name = Column(String(50))
