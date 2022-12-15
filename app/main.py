@@ -18,17 +18,14 @@ def initialize() -> None:
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173",
-]
+origins = ["*"]
 
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["POST", "GET"],
-		allow_headers=["*"],
-    max_age=3600,
+  CORSMiddleware,
+  allow_origins=origins, # Allows all origins
+  allow_credentials=True,
+  allow_methods=["*"], # Allows all methods
+  allow_headers=["*"], # Allows all headers
 )
 
 initialize()

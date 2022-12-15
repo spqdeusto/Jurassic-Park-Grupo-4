@@ -79,6 +79,7 @@ import HelloWorld from './components/HelloWorld.vue'
             <marquee>Bienvenido al panel de Jurassic Park. Esto se trata de una prueba.</marquee>
         </q-toolbar>
         <HelloWorld  class="bg-brown-6"></HelloWorld>
+        <CreateDinosaur></CreateDinosaur>
       </q-page-sticky>
     </q-page-container>
   </q-layout>
@@ -86,22 +87,24 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <script>
 import { ref } from 'vue'
+import CreateDinosaur from './components/CreateDinosaur.vue';
 export default {
-  name: 'JurassicParkLayout',
-  setup () {
-    const leftDrawerOpen = ref(false)
-    const search = ref('')
-    const storage = ref(0.26)
-    function toggleLeftDrawer () {
-      leftDrawerOpen.value = !leftDrawerOpen.value
-    }
-    return {
-      leftDrawerOpen,
-      search,
-      storage,
-      toggleLeftDrawer
-    }
-  }
+    name: "JurassicParkLayout",
+    setup() {
+        const leftDrawerOpen = ref(false);
+        const search = ref("");
+        const storage = ref(0.26);
+        function toggleLeftDrawer() {
+            leftDrawerOpen.value = !leftDrawerOpen.value;
+        }
+        return {
+            leftDrawerOpen,
+            search,
+            storage,
+            toggleLeftDrawer
+        };
+    },
+    components: { CreateDinosaur }
 }
 </script>
 

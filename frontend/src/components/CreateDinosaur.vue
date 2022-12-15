@@ -10,34 +10,34 @@
 
         <span>Specie</span><br>
         <input 
-          v-model="specie"
-          type="text"
+          v-model="specie_id"
+          type="number"
           placeholder="Introduce la especie del dinosaurio" 
         /><br>
 
         <span>Age</span><br>
         <input 
           v-model="age"
-          type="text"
+          type="number"
           placeholder="Introduce la edad del dinosaurio" 
         /><br>
         <span>Weight</span><br>
         <input 
           v-model="weight"
-          type="text"
+          type="number"
           placeholder="Introduce el peso del dinosaurio" 
         /><br>
 
         <span>Gender</span><br>
         <select required name="gender" id="gender" v-model="gender">
-          <option value=1>Male</option>
-          <option value=2>Female</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
         </select>
 
         <span>Dangerousness</span><br>
         <select required name="dangerousness" id="dangerousness" v-model="dangerousness">
-          <option value=1>Peaceful</option>
-          <option value=2>Aggresive</option>
+          <option value="peaceful">Peaceful</option>
+          <option value="aggresive">Aggresive</option>
         </select>
 
         <input 
@@ -47,34 +47,32 @@
         >
 
       </form>
-      <div v-if="formSubmitted">
-        <h3>Form Submitted</h3>
-        <p>Name: {{ name }}</p>
-        <p>Gender: {{ gender }}</p>
-        <small>Click on run to launch the app again.</small>
-      </div>
-
     </div>
   </template>
 
   <script>
 import axios from 'axios';
+const axiosInstance = axios.create({
+  headers: {
+    "Access-Control-Allow-Origin":"*"
+  }
+});
 
     export default {
       data() {
         return {
           name: "",
           specie_id: 0,
-          gender: 0,
+          gender: "",
           age: 0,
           weight: 0,
-          dangerousness: 0,
+          dangerousness: "",
           enclosure_id: 1,
         };
       },
       methods: {
         submitForm: function () {
-          axios.post(
+          axiosInstance.post(
             "http://localhost:8000/dinosaur/create",
             {name: this.name,
             specie_id: this.specie_id,
@@ -84,12 +82,12 @@ import axios from 'axios';
             dangerousness: this.dangerousness,
             enclosure_id: this.enclosure_id
           }).then((response) => {
-            this.response = JSON.stringify(response, null, 2);
+            this.response = JSON.stringify(response);
             console.log(response);
           });
         }
-      },
-    };
+      }
+        };
   </script>
   <style>
 
