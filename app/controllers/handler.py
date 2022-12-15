@@ -23,7 +23,7 @@ class Controllers:
     return {"status": "ok"}
 
   def create_specie(self, body: models.Specie):
-    body_row = mysql_models.Species(name=body.name)
+    body_row = mysql_models.Specie(name=body.name)
     db = DatabaseClient(gb.MYSQL_URL)
     with Session(db.engine) as session:
       session.add(body_row)
@@ -132,7 +132,7 @@ class Controllers:
     return {"status": "ok"}
     
   def update_specie(self, specie_id, body: models.Specie):
-    body_row = mysql_models.Species(name = body.name)
+    body_row = mysql_models.Specie(name = body.name)
     db = DatabaseClient(gb.MYSQL_URL)
     with Session(db.engine) as session:
       specie: mysql_models.Specie = session.query(mysql_models.Specie).get(specie_id)
