@@ -13,7 +13,7 @@ class Controllers:
   # CREATE METHODS 
 
   def create_dinosaur(self, body: models.Dinosaur):
-    body_row = mysql_models.Dinosaur(name=body.name, specie_id=body.specie_id, age=body.age, weight=body.weight, gender=body.gender, dangerousness=body.dangerousness, enclosure_id=body.encosure_id)
+    body_row = mysql_models.Dinosaur(name=body.name, specie_id=body.specie_id, age=body.age, weight=body.weight, gender=body.gender, dangerousness=body.dangerousness, enclosure_id=body.enclosure_id)
     db = DatabaseClient(gb.MYSQL_URL)
     with Session(db.engine) as session:
       session.add(body_row)
@@ -114,7 +114,7 @@ class Controllers:
   # UPDATE METHODS 
 
   def update_dinosaur(self, dinosaur_id, body: models.Dinosaur):
-    body_row = mysql_models.Dinosaur(name=body.name, specie_id=body.specie_id, age=body.age, weight=body.weight, gender=body.gender, dangerousness=body.dangerousness, enclosure_id=body.encosure_id)
+    body_row = mysql_models.Dinosaur(name=body.name, specie_id=body.specie_id, age=body.age, weight=body.weight, gender=body.gender, dangerousness=body.dangerousness, enclosure_id=body.enclosure_id)
     db = DatabaseClient(gb.MYSQL_URL)
     with Session(db.engine) as session:
       dinosaur: mysql_models.Dinosaur = session.query(mysql_models.Dinosaur).get(dinosaur_id)
@@ -124,7 +124,7 @@ class Controllers:
       dinosaur.weight = body.weight
       dinosaur.gender = body.gender
       dinosaur.dangerousness = body.dangerousness
-      dinosaur.encosure_id = body.encosure_id
+      dinosaur.enclosure_id = body.enclosure_id
       session.dirty
       session.commit()
       session.close()
