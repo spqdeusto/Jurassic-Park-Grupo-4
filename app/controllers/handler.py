@@ -62,6 +62,7 @@ class Controllers:
 
     return {"status": "ok"}
 
+
   # GET METHODS
 
   def get_dinosaurs(self):
@@ -109,6 +110,7 @@ class Controllers:
       
     return response
 
+
   # UPDATE METHODS 
 
   def update_dinosaur(self, dinosaur_id, body: models.Dinosaur):
@@ -129,7 +131,6 @@ class Controllers:
   
     return {"status": "ok"}
     
-
   def update_specie(self, specie_id, body: models.Specie):
     body_row = mysql_models.Species(name = body.name)
     db = DatabaseClient(gb.MYSQL_URL)
@@ -179,3 +180,56 @@ class Controllers:
     return {"status": "ok"}
 
   
+  # DELETE METHODS 
+
+  def delete_dinosaur(self, dinosaur_id):
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      dinosaur: mysql_models.Dinosaur = session.query(mysql_models.Dinosaur).get(dinosaur_id)
+      session.delete(dinosaur)
+      session.dirty
+      session.commit()
+      session.close()
+  
+    return {"status": "ok"}
+    
+  def delete_specie(self, specie_id):
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      specie: mysql_models.Specie = session.query(mysql_models.Specie).get(specie_id)
+      session.delete(specie)
+      session.dirty
+      session.commit()
+      session.close()
+  
+    return {"status": "ok"}
+
+  def delete_enclosure(self, enclosue_id):
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      enclosure: mysql_models.Enclosure = session.query(mysql_models.Enclosure).get(enclosue_id)
+      session.delete(enclosure)
+      session.commit()
+      session.close()
+  
+    return {"status": "ok"}
+
+  def delete_offroad(self, offroad_id):
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      offroad: mysql_models.OffRoad = session.query(mysql_models.OffRoad).get(offroad_id)
+      session.delete(offroad)
+      session.commit()
+      session.close()
+
+    return {"status": "ok"}
+
+  def delete_alarm(self, alarm_id):
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      alarm: mysql_models.Alarm = session.query(mysql_models.Alarm).get(alarm_id)
+      session.delete(alarm)
+      session.commit()
+      session.close()
+
+    return {"status": "ok"}
