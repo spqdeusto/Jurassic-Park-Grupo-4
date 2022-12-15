@@ -1,5 +1,5 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/DinosaurGet.vue'
 </script>
 
 <template>
@@ -78,8 +78,10 @@ import HelloWorld from './components/HelloWorld.vue'
           <q-space />
             <marquee>Bienvenido al panel de Jurassic Park. Esto se trata de una prueba.</marquee>
         </q-toolbar>
-        <HelloWorld  class="bg-brown-6"></HelloWorld>
-        <CreateDinosaur></CreateDinosaur>
+        <DinosaurGet  class="bg-brown-6"></DinosaurGet>
+        <DinosaurCreate></DinosaurCreate>
+        <OffRoadCreate></OffRoadCreate>
+        <OffRoadGet></OffRoadGet>
       </q-page-sticky>
     </q-page-container>
   </q-layout>
@@ -87,7 +89,11 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <script>
 import { ref } from 'vue'
-import CreateDinosaur from './components/CreateDinosaur.vue';
+import CreateDinosaur from './components/DinosaurCreate.vue';
+import DinosaurGet from './components/DinosaurGet.vue';
+import DinosaurCreate from './components/DinosaurCreate.vue';
+import OffRoadCreate from './components/OffRoadCreate.vue';
+import OffRoadGet from './components/OffRoadGet.vue';
 export default {
     name: "JurassicParkLayout",
     setup() {
@@ -104,7 +110,7 @@ export default {
             toggleLeftDrawer
         };
     },
-    components: { CreateDinosaur }
+    components: { CreateDinosaur, DinosaurGet, DinosaurCreate, OffRoadCreate, OffRoadGet }
 }
 </script>
 

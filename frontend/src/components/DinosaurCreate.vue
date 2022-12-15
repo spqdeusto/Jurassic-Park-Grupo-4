@@ -22,12 +22,16 @@
           v-model="age"
           type="number"
           placeholder="Introduce la edad del dinosaurio" 
+          min="0"
+          max="300"
+          
         /><br>
         <span>Weight</span><br>
         <input 
           v-model="weight"
           type="number"
-          placeholder="Introduce el peso del dinosaurio" 
+          placeholder="Introduce el peso del dinosaurio"
+          min="0"
         /><br>
 
         <span>Gender</span><br>
@@ -101,5 +105,11 @@ import axios from 'axios';
       };
   </script>
   <style>
-
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
   </style>
