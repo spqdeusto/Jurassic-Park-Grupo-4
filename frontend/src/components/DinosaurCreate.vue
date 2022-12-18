@@ -13,7 +13,7 @@
           <option v-for="specie in species" :value="specie">
             {{ specie.name }}
           </option>
-        </select>
+        </select><br>
 
         <span>Age</span><br>
         <input 
@@ -24,6 +24,7 @@
           max="300"
           
         /><br>
+
         <span>Weight</span><br>
         <input 
           v-model="weight"
@@ -36,20 +37,20 @@
         <select required name="gender" id="gender" v-model="gender">
           <option value="male">Male</option>
           <option value="female">Female</option>
-        </select>
+        </select><br>
 
         <span>Dangerousness</span><br>
         <select required name="dangerousness" id="dangerousness" v-model="dangerousness">
           <option value="peaceful">Peaceful</option>
           <option value="aggressive">Aggressive</option>
-        </select>
+        </select><br>
 
         <span>Enclosure</span><br>
         <select required name="enclosures" id="enclosures" v-model="enclosure">
           <option v-for="enclosure in enclosures" :value="enclosure">
             {{ enclosure.name }}
           </option>
-        </select>
+        </select><br>
         
         <input 
           class="submit" 

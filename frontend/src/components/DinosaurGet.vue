@@ -8,11 +8,28 @@ defineProps({
 </script>
 
 <template>
-  <ul id="example-1">
-    <li v-for="item in dinosaurs" :key="item">
-      {{ item.name }} | {{ item.age }}
-    </li>
-  </ul>
+  <table style="width:100%">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Specie Id</th>
+      <th>Age</th>
+      <th>Weight</th>
+      <th>Gender</th>
+      <th>Dangerousness</th>
+      <th>Enclosure Id</th>
+    </tr>
+    <tr v-for="item in dinosaurs" :key="item">
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.specie_id }}</td>
+      <td>{{ item.age }}</td>
+      <td>{{ item.weight }}</td>
+      <td>{{ item.gender }}</td>
+      <td>{{ item.dangerousness }}</td>
+      <td>{{ item.enclosure_id }}</td>
+    </tr>
+  </table>
 </template>
 
 <script>
