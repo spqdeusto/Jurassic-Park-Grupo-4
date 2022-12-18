@@ -12,8 +12,8 @@
           v-model="n_visitors"
           type="number"
           placeholder="Introduce los visitantes" 
-          min="0"
-          max="20"
+          min="1"
+          max="5"
           
         /><br>
         <span>Securuity System</span><br>

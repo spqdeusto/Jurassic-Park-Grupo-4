@@ -43,7 +43,7 @@
         <span>Dangerousness</span><br>
         <select required name="dangerousness" id="dangerousness" v-model="dangerousness">
           <option value="peaceful">Peaceful</option>
-          <option value="aggresive">Aggresive</option>
+          <option value="aggressive">Aggressive</option>
         </select>
 
         <input 
@@ -73,7 +73,7 @@ import axios from 'axios';
           age: 0,
           weight: 0,
           dangerousness: "",
-          enclosure_id: 1,
+          enclosure_id: 2,
           species: [],
         };
       },
