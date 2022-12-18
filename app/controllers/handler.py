@@ -168,12 +168,38 @@ class Controllers:
 
     return {"status": "ok"}
 
-  def update_alarm(self, alarm_id, body: models.Alarm):
-    body_row = mysql_models.Alarm(status = body.status)
+  def update_alarm(self, alarm_id):
     db = DatabaseClient(gb.MYSQL_URL)
+    alarm_status = "normal"
     with Session(db.engine) as session:
+      result = session.query(mysql_models.Enclosure).filter_by(status = False).\
+        join(mysql_models.Enclosure.dinosaur).filter_by(dangerousness = "aggressive").first()
+      result_2 = session.query(mysql_models.OffRoad).filter_by(on_route = True).first()
+      #print(result)
+      #print(result_2)
+      if (result != None) and (result_2 != None):
+        alarm_status = "maximum"
+        for offroad in session.query(mysql_models.OffRoad).all():
+          #print(offroad.security_system)
+          offroad.security_system = True
+          #print(offroad)
+      else:
+        result_2 = session.query(mysql_models.OffRoad).filter_by(on_route = False).first()
+        if (result != None) and (result_2 != None):
+          alarm_status = "average"
+        else:
+          result = session.query(mysql_models.Enclosure).filter_by(status = False).\
+            join(mysql_models.Enclosure.dinosaur).filter_by(dangerousness = "peaceful").first()
+          if result != None:
+            alarm_status = "low"
+     
       alarm: mysql_models.Alarm = session.query(mysql_models.Alarm).get(alarm_id)
-      alarm.status = body.status
+      alarm.status = alarm_status
+
+      if alarm_status != "maximum":
+        for offroad in session.query(mysql_models.OffRoad).all():
+          offroad.security_system = False
+      
       session.commit()
       session.close()
 

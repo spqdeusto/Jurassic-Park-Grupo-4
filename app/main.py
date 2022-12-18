@@ -182,7 +182,7 @@ async def update_offroad(offroad_id, body: models.OffRoad):
   return controller.update_offroad(offroad_id, body)
 
 @app.post('/alarm/update')
-async def update_alarm(alarm_id, body: models.Alarm):
+async def update_alarm(alarm_id):
   """! Es la función que llama a la base de datos para realizar una actualización de la alarma
 
   @param alarm_id es el indentificador de un alarma
@@ -190,7 +190,7 @@ async def update_alarm(alarm_id, body: models.Alarm):
 
   @return devuelve el identificador de la alarma y la nueva información  
   """
-  return controller.update_alarm(alarm_id, body)
+  return controller.update_alarm(alarm_id)
 
 
 # DELETE METHODS

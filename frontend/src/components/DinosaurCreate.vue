@@ -9,12 +9,10 @@
         /><br>
 
         <span>Specie</span><br>
-        <select required name="species" id="species" v-model="specie_id">
+        <select required name="species" id="species" v-model="specie">
           <option v-for="specie in species" :value="specie">
             {{ specie.name }}
           </option>
-<!--           <option value="male">Male</option>
-          <option value="female">Female</option> -->
         </select>
 
         <span>Age</span><br>
@@ -22,12 +20,16 @@
           v-model="age"
           type="number"
           placeholder="Introduce la edad del dinosaurio" 
+          min="0"
+          max="300"
+          
         /><br>
         <span>Weight</span><br>
         <input 
           v-model="weight"
           type="number"
-          placeholder="Introduce el peso del dinosaurio" 
+          placeholder="Introduce el peso del dinosaurio"
+          min="0"
         /><br>
 
         <span>Gender</span><br>
@@ -39,9 +41,16 @@
         <span>Dangerousness</span><br>
         <select required name="dangerousness" id="dangerousness" v-model="dangerousness">
           <option value="peaceful">Peaceful</option>
-          <option value="aggresive">Aggresive</option>
+          <option value="aggressive">Aggressive</option>
         </select>
 
+        <span>Enclosure</span><br>
+        <select required name="enclosures" id="enclosures" v-model="enclosure">
+          <option v-for="enclosure in enclosures" :value="enclosure">
+            {{ enclosure.name }}
+          </option>
+        </select>
+        
         <input 
           class="submit" 
           type="submit" 
@@ -64,12 +73,13 @@ import axios from 'axios';
       data() {
         return {
           name: "",
-          specie_id: {},
+          specie: {},
+          enclosure: {},
           gender: "",
           age: 0,
           weight: 0,
           dangerousness: "",
-          enclosure_id: 1,
+          enclosures: [],
           species: [],
         };
       },
@@ -78,12 +88,12 @@ import axios from 'axios';
           axios.post(
             "http://localhost:8000/dinosaur/create",
             {name: this.name,
-            specie_id: this.specie_id.id,
+            specie_id: this.specie.id,
             age: this.age,
             weight: this.weight,
             gender: this.gender,
             dangerousness: this.dangerousness,
-            enclosure_id: this.enclosure_id
+            enclosure_id: this.enclosure.id
           }).then((response) => {
             this.response = JSON.stringify(response);
             console.log(response);
@@ -93,13 +103,25 @@ import axios from 'axios';
           const response = await axios.get('http://localhost:8000/specie/get_all')
           this.species = response.data
           console.log(this.species)
+        },
+        async getEnclosures () {
+          const response = await axios.get('http://localhost:8000/enclosure/get_all')
+          this.enclosures = response.data
+          console.log(this.enclosures)
         }
         },
         created () {
           this.getSpecies()
+          this.getEnclosures()
         }
       };
   </script>
   <style>
-
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
   </style>
