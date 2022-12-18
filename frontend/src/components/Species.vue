@@ -31,6 +31,7 @@ import axios from 'axios';
         return {
             species: [],
             name: "",
+            specie_id: 0
         }
       },
       methods: {
@@ -45,11 +46,8 @@ import axios from 'axios';
             this.species = response.data
             console.log(this.species)
         },
-        async deleteSpecie (id) {
-            axios.post("http://localhost:8000/specie/delete",{specie_id: id}).then((response) => {
-                this.response = JSON.stringify(response);
-                console.log(response);
-          });
+        deleteSpecie(id) {
+            axios.get("http://localhost:8000/specie/delete/"+id)
         }
       },
       created () {
