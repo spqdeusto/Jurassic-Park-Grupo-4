@@ -45,7 +45,7 @@
   </template>
 
   <script>
-import axios from 'axios';
+  import axios from 'axios';
 
     export default {
       data() {
@@ -54,7 +54,8 @@ import axios from 'axios';
 
           on_route: false,
           n_visitors: 0,
-          security_system: false
+          security_system: false,
+          off_roads: []
         };
       },
       methods: {
