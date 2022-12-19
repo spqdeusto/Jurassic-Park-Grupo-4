@@ -1,4 +1,11 @@
 <template>
+
+    <ul id="off_road">
+      <li v-for="offroad in off_roads" :key="offroad">
+        {{ offroad.on_route }} | {{ offroad.n_visitors }}
+      </li>
+    </ul>
+
     <div>
       <form @submit.prevent="submitForm" v-if="!formSubmitted">
         <span>On Route</span><br>
@@ -16,7 +23,7 @@
           max="5"
           
         /><br>
-        <span>Securuity System</span><br>
+        <span>Security System</span><br>
         <input 
           v-model="security_system"
           type="checkbox"
@@ -40,7 +47,8 @@ import axios from 'axios';
         return {
           on_route: false,
           n_visitors: 0,
-          security_system: false
+          security_system: false,
+          off_roads: []
         };
       },
       methods: {
@@ -54,9 +62,19 @@ import axios from 'axios';
             this.response = JSON.stringify(response);
             console.log(response);
           });
-        }}
-      };
+        },
+        async getOffRoads () {
+        const response = await axios.get('http://localhost:8000/offroad/get_all')
+        this.off_roads = response.data
+        console.log(this.off_roads)
+        }
+      },
+      created () {
+        this.getOffRoads()
+      }
+    };
   </script>
+
   <style>
     input[type=number]::-webkit-inner-spin-button, 
     input[type=number]::-webkit-outer-spin-button { 
