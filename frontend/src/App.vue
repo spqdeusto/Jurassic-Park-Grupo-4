@@ -62,7 +62,7 @@
 
         <q-card class="my-card" v-show="dinosaurs">
           <q-card-section>
-            <Dinosaur></Dinosaur>
+            <Dinosaur ref="foo"></Dinosaur>
           </q-card-section>
         </q-card>
 
@@ -128,6 +128,7 @@ export default {
         showDinosaurs: function() {
           this.hideAll()
           this.dinosaurs=true
+          this.$refs.foo.updateForm()
         },
         showSpecies: function() {
           this.hideAll()
@@ -237,14 +238,21 @@ table
   border: 6px solid rgb(255 255 255 / 10%)
 
 td
-  border-top: 8px solid rgb(255 255 255 / 18%)
+  border-top: 3px solid rgba(255, 255, 255, 0.08)
+  padding: 0px 15px
 
 th
   background: #402d27
 
 hr
-  border: 4px solid rgb(0 0 0 / 24%)
+  border: 3px solid #000000
+  background: #fe0000 !important
+  box-shadow: 0px 0px 0px 3px #ffff01
+  color: #fff
+  font-weight: bold
+  border-radius: 1px
   margin: 20px 0px
+  height: 3px
 
 button,input,select
   background: #291a15
@@ -253,4 +261,12 @@ button,input,select
   border: none
   padding: 5px 18px
   margin: 10px 0px
+
+.submit
+  border: 3px solid #000000
+  background: #fe0000!important
+  box-shadow: 0px 0px 0px 3px #ffff01
+  color: #fff
+  font-weight: bold
+  border-radius: 1px
 </style>

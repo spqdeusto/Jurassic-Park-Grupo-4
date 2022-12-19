@@ -3,12 +3,12 @@
     <tr>
       <th>Id</th>
       <th>Name</th>
-      <th>Delete</th>
+      <th>Actions</th>
     </tr>
     <tr v-for="item in species" :key="item">
       <td>{{ item.id }}</td>
-      <td>{{ item.name }}</td>
-      <td align="center"><q-btn round color="red" v-on:click="deleteSpecie(item.id)" icon="delete_outline" /></td>
+      <td><b>{{ item.name }}</b></td>
+      <td align="center"><q-btn round color="red" size="xs" v-on:click="deleteSpecie(item.id)" icon="delete_outline" /></td>
     </tr>
   </table>
   <hr>
@@ -18,13 +18,13 @@
         <input 
           v-model="name"
           type="text"
-          placeholder="Introduce el nombre de la especie" 
+          placeholder="Specie name" 
         /><br>
 
         <input 
           class="submit" 
           type="submit" 
-          value="Submit"
+          value="Add Specie"
         >
       </form>
     </div>

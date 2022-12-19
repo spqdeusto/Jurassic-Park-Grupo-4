@@ -5,14 +5,14 @@
       <th>On Route</th>
       <th>N.º visitors</th>
       <th>Security system</th>
-      <th>Delete</th>
+      <th>Actions</th>
     </tr>
     <tr v-for="item in off_roads" :key="item">
       <td>{{ item.id }}</td>
       <td>{{ item.on_route }}</td>
       <td>{{ item.n_visitors }}</td>
       <td>{{ item.security_system }}</td>
-      <td align="center"><q-btn round color="red" v-on:click="deleteOffRoad(item.id)" icon="delete_outline" /></td>
+      <td align="center"><q-btn round color="red" size="xs" v-on:click="deleteOffRoad(item.id)" icon="delete_outline" /></td>
     </tr>
   </table>
   <hr>
@@ -28,7 +28,6 @@
         <input 
           v-model="n_visitors"
           type="number"
-          placeholder="Introduce los visitantes" 
           min="1"
           max="5"
           
@@ -37,7 +36,7 @@
         <input 
           class="submit" 
           type="submit" 
-          value="Submit"
+          value="Add OffRoad"
         >
 
       </form>

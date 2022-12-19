@@ -2,15 +2,15 @@
   <table>
     <tr>
       <th>Id</th>
-      <th>Status</th>
       <th>Name</th>
-      <th>Delete</th>
+      <th>Status</th>
+      <th>Actions</th>
     </tr>
     <tr v-for="item in enclosures" :key="item">
       <td>{{ item.id }}</td>
+      <td><b>{{ item.name }}</b></td>
       <td>{{ item.status }}</td>
-      <td>{{ item.name }}</td>
-      <td align="center"><q-btn round color="red" v-on:click="deleteEnclosure(item.id)" icon="delete_outline" /></td>
+      <td align="center"><q-btn round color="red" size="xs" v-on:click="deleteEnclosure(item.id)" icon="delete_outline" /></td>
     </tr>
   </table>
   <hr>
@@ -20,7 +20,7 @@
         <input 
           v-model="name"
           type="text"
-          placeholder="Introduce a name"
+          placeholder="Enclosure name"
         /><br>
 
         <span>Electric system activated</span><br>
@@ -32,7 +32,7 @@
         <input 
           class="submit" 
           type="submit" 
-          value="Submit"
+          value="Add Enclosure"
         >
 
       </form>

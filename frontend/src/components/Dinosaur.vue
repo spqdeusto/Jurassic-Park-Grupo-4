@@ -9,18 +9,18 @@
       <th>Gender</th>
       <th>Dangerousness</th>
       <th>Enclosure Id</th>
-      <th>Delete</th>
+      <th>Actions</th>
     </tr>
     <tr v-for="item in dinosaurs" :key="item">
       <td>{{ item.id }}</td>
-      <td>{{ item.name }}</td>
+      <td><b>{{ item.name }}</b></td>
       <td>{{ item.specie_id }}</td>
       <td>{{ item.age }}</td>
       <td>{{ item.weight }}</td>
       <td>{{ item.gender }}</td>
       <td>{{ item.dangerousness }}</td>
       <td>{{ item.enclosure_id }}</td>
-      <td align="center"><q-btn round color="red" v-on:click="deleteDinosaur(item.id)" icon="delete_outline" /></td>
+      <td align="center"><q-btn round color="red" size="xs" v-on:click="deleteDinosaur(item.id)" icon="delete_outline" /></td>
     </tr>
   </table>
   <hr>
@@ -30,7 +30,7 @@
         <input 
           v-model="name"
           type="text"
-          placeholder="Introduce el nombre del dinosaurio" 
+          placeholder="Dinosaur name" 
         /><br>
 
         <span>Specie</span><br>
@@ -44,7 +44,6 @@
         <input 
           v-model="age"
           type="number"
-          placeholder="Introduce la edad del dinosaurio" 
           min="0"
           max="300"
           
@@ -54,7 +53,6 @@
         <input 
           v-model="weight"
           type="number"
-          placeholder="Introduce el peso del dinosaurio"
           min="0"
         /><br>
 
@@ -80,7 +78,7 @@
         <input 
           class="submit" 
           type="submit" 
-          value="Submit"
+          value="Add Dinosaur"
         >
       </form>
     </div>
@@ -136,6 +134,10 @@ export default {
     async getEnclosures () {
       const response = await axios.get('http://localhost:8000/enclosure/get_all')
       this.enclosures = response.data
+    },
+    updateForm() {
+      this.getSpecies()
+      this.getEnclosures()
     }
   },
   created () {
