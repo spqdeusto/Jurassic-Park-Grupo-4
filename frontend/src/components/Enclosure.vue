@@ -1,19 +1,19 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
-})
-</script>
-
 <template>
-  <ul id="enclosures">
-    <li v-for="enclosure in enclosures" :key="enclosure">
-      {{ enclosure.name }} | {{ enclosure.status }}
-    </li>
-  </ul>
-
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Status</th>
+      <th>Name</th>
+      <th>Delete</th>
+    </tr>
+    <tr v-for="item in enclosures" :key="item">
+      <td>{{ item.id }}</td>
+      <td>{{ item.status }}</td>
+      <td>{{ item.name }}</td>
+      <td align="center"><q-btn round color="red" v-on:click="deleteEnclosure(item.id)" icon="delete_outline" /></td>
+    </tr>
+  </table>
+  <hr>
   <div>
       <form @submit.prevent="submitForm" v-if="!formSubmitted">
         <span>Name</span><br>
@@ -49,25 +49,30 @@ export default {
   data () {
     return {
       enclosures: [],
+
       name: "",
       status: false
     }
   },
   methods: {
-    submitForm: function () {
-          axios.post(
-            "http://localhost:8000/enclosure/create",
-            {name: this.name,
-            status: this.status
-          }).then((response) => {
-            this.response = JSON.stringify(response);
-            console.log(response);
-          });
-        },
     async getEnclosures () {
       const response = await axios.get('http://localhost:8000/enclosure/get_all')
       this.enclosures = response.data
-      console.log(this.enclosures)
+    },
+    deleteEnclosure(id) {
+        axios.get("http://localhost:8000/enclosure/delete/"+id)
+        setTimeout(() => this.getEnclosures(), 500);
+    },
+    submitForm: function () {
+      axios.post(
+        "http://localhost:8000/enclosure/create",
+        {name: this.name,
+        status: this.status
+      }).then((response) => {
+        this.response = JSON.stringify(response);
+        console.log(response);
+      });
+      setTimeout(() => this.getEnclosures(), 500);
     }
   },
   created () {

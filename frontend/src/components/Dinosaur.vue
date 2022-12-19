@@ -1,14 +1,5 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
-})
-</script>
-
 <template>
-  <table style="width:100%">
+  <table>
     <tr>
       <th>Id</th>
       <th>Name</th>
@@ -44,7 +35,7 @@ defineProps({
 
         <span>Specie</span><br>
         <select required name="species" id="species" v-model="specie">
-          <option v-for="specie in species" :value="specie">
+          <option v-for="specie in species" :value="specie.id">
             {{ specie.name }}
           </option>
         </select><br>
@@ -81,7 +72,7 @@ defineProps({
 
         <span>Enclosure</span><br>
         <select required name="enclosures" id="enclosures" v-model="enclosure">
-          <option v-for="enclosure in enclosures" :value="enclosure">
+          <option v-for="enclosure in enclosures" :value="enclosure.id">
             {{ enclosure.name }}
           </option>
         </select><br>
@@ -118,37 +109,33 @@ export default {
     async getDinosaurs () {
       const response = await axios.get('http://localhost:8000/dinosaur/get_all')
       this.dinosaurs = response.data
-      console.log(this.dinosaurs)
     },
     deleteDinosaur(id) {
         axios.get("http://localhost:8000/dinosaur/delete/"+id)
-        this.getDinosaurs()
+        setTimeout(() => this.getDinosaurs(), 500);
     },
     submitForm: function () {
       axios.post(
         "http://localhost:8000/dinosaur/create",
         {name: this.name,
-        specie_id: this.specie.id,
+        specie_id: this.specie,
         age: this.age,
         weight: this.weight,
         gender: this.gender,
         dangerousness: this.dangerousness,
-        enclosure_id: this.enclosure.id
+        enclosure_id: this.enclosure
       }).then((response) => {
         this.response = JSON.stringify(response);
-        console.log(response);
       });
-      this.getDinosaurs()
+      setTimeout(() => this.getDinosaurs(), 500);
     },
     async getSpecies () {
       const response = await axios.get('http://localhost:8000/specie/get_all')
       this.species = response.data
-      console.log(this.species)
     },
     async getEnclosures () {
       const response = await axios.get('http://localhost:8000/enclosure/get_all')
       this.enclosures = response.data
-      console.log(this.enclosures)
     }
   },
   created () {
@@ -158,27 +145,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  top: -10px;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
-}
-</style>

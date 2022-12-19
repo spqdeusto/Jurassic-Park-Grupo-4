@@ -48,12 +48,6 @@
             <q-item-label>OffRoads</q-item-label>
           </q-item-section>
         </q-item>
-
-        <q-item clickable class="JPARK__drawer-link JPARK__drawer-link--alarm">
-          <q-item-section class="alarm-text">
-            <q-item-label>Alarm</q-item-label>
-          </q-item-section>
-        </q-item>
       </q-list>
     </q-drawer>
 
@@ -72,24 +66,44 @@
           </q-card-section>
         </q-card>
 
-        <q-card class="my-card" v-show="offRoads">
+        <q-card class="my-card" v-show="species">
           <q-card-section>
-            <OffRoadCreate></OffRoadCreate>
-            <OffRoadGet></OffRoadGet>
+            <Specie></Specie>
           </q-card-section>
         </q-card>
 
+        <q-card class="my-card" v-show="enclosures">
+          <q-card-section>
+            <Enclosure></Enclosure>
+          </q-card-section>
+        </q-card>
 
+        <q-card class="my-card" v-show="offRoads">
+          <q-card-section>
+            <OffRoad></OffRoad>
+          </q-card-section>
+        </q-card>
       </q-page>
     </q-page-container>
   </q-layout>
 </template>
 
+<script setup>
+defineProps({
+  msg: {
+    type: String,
+    required: true
+  }
+})
+</script>
+
 <script>
 import { ref } from 'vue';
 import Dinosaur from './components/Dinosaur.vue';
-import OffRoadCreate from './components/OffRoadCreate.vue';
-import OffRoadGet from './components/OffRoadGet.vue';
+import Specie from './components/Specie.vue';
+import Enclosure from './components/Enclosure.vue';
+import OffRoad from './components/OffRoad.vue';
+
 export default {
     name: "JurassicParkLayout",
     data(){
@@ -136,8 +150,9 @@ export default {
     },
     components: {
       Dinosaur, 
-      OffRoadCreate, 
-      OffRoadGet 
+      Specie, 
+      Enclosure,
+      OffRoad 
     }
 }
 </script>
@@ -218,6 +233,7 @@ export default {
   font-size: 1.2em
 
 table
+  width: 100%
   border: 6px solid rgb(255 255 255 / 10%)
 
 td
