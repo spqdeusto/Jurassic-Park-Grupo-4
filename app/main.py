@@ -126,13 +126,13 @@ async def get_offroads():
   """ 
   return controller.get_offroads()
 
-@app.get('/alarm/get_all')
-async def get_alarms():
-  """! Es la función que llama a la base de datos para obtener las alarmas
+@app.get('/alarm/get')
+async def get_alarm():
+  """! Es la función que llama a la base de datos para obtener la alarma
 
   @return devuelve las alarmas de la base de datos   
   """ 
-  return controller.get_alarms()
+  return controller.get_alarm()
 
 
 # UPDATE METHODS
@@ -181,17 +181,6 @@ async def update_offroad(offroad_id, body: models.OffRoad):
   """
   return controller.update_offroad(offroad_id, body)
 
-@app.post('/alarm/update')
-async def update_alarm(alarm_id):
-  """! Es la función que llama a la base de datos para realizar una actualización de la alarma
-
-  @param alarm_id es el indentificador de un alarma
-  @param body: Alarm contiene los nuevos atributos para la actualización
-
-  @return devuelve el identificador de la alarma y la nueva información  
-  """
-  return controller.update_alarm(alarm_id)
-
 
 # DELETE METHODS
 
@@ -234,13 +223,3 @@ async def delete_offroad(offroad_id: int):
   @return devuelve un "ok", para aceptar la eliminación del todotorreno
   """
   return controller.delete_offroad(offroad_id)
-
-@app.get('/alarm/delete/{alarm_id}')
-async def delete_alarm(alarm_id: int):
-  """! Es la función que llama a la base de datos para realizar una eliminación de una alarma
-
-  @param alarm_id se envia el identificador de la alarma
-
-  @return devuelve un "ok", para aceptar la eliminación de la alarma
-  """
-  return controller.delete_alarm(alarm_id)

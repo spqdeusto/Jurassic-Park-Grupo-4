@@ -19,7 +19,7 @@ class Controllers:
       session.add(body_row)
       session.commit()
       session.close()
-  
+    self.update_alarm()
     return {"status": "ok"}
 
   def create_specie(self, body: models.Specie):
@@ -29,7 +29,7 @@ class Controllers:
       session.add(body_row)
       session.commit()
       session.close()
-  
+    self.update_alarm()
     return {"status": "ok"}
 
   def create_enclosure(self, body: models.Enclosure):
@@ -39,7 +39,7 @@ class Controllers:
       session.add(body_row)
       session.commit()
       session.close()
-  
+    self.update_alarm()
     return {"status": "ok"}
 
   def create_offroad(self, body: models.OffRoad):
@@ -49,7 +49,7 @@ class Controllers:
       session.add(body_row)
       session.commit()
       session.close()
-
+    self.update_alarm()
     return {"status": "ok"}
 
   def create_alarm(self, body: models.Alarm):
@@ -101,7 +101,7 @@ class Controllers:
       
     return response
   
-  def get_alarms(self):
+  def get_alarm(self):
     db = DatabaseClient(gb.MYSQL_URL)
     response: list = []
     with Session(db.engine) as session:
@@ -128,7 +128,7 @@ class Controllers:
       session.dirty
       session.commit()
       session.close()
-  
+    self.update_alarm()
     return {"status": "ok"}
     
   def update_specie(self, specie_id, body: models.Specie):
@@ -140,7 +140,7 @@ class Controllers:
       session.dirty
       session.commit()
       session.close()
-  
+    self.update_alarm()
     return {"status": "ok"}
 
   def update_enclosure(self, enclosue_id, body: models.Enclosure):
@@ -152,7 +152,7 @@ class Controllers:
       enclosure.status = body.status
       session.commit()
       session.close()
-  
+    self.update_alarm()
     return {"status": "ok"}
 
   def update_offroad(self, offroad_id, body: models.OffRoad):
@@ -165,24 +165,20 @@ class Controllers:
       offroad.security_system = body.security_system
       session.commit()
       session.close()
-
+    self.update_alarm()
     return {"status": "ok"}
 
-  def update_alarm(self, alarm_id):
+  def update_alarm(self):
     db = DatabaseClient(gb.MYSQL_URL)
     alarm_status = "normal"
+
     with Session(db.engine) as session:
       result = session.query(mysql_models.Enclosure).filter_by(status = False).\
         join(mysql_models.Enclosure.dinosaur).filter_by(dangerousness = "aggressive").first()
       result_2 = session.query(mysql_models.OffRoad).filter_by(on_route = True).first()
-      #print(result)
-      #print(result_2)
+
       if (result != None) and (result_2 != None):
         alarm_status = "maximum"
-        for offroad in session.query(mysql_models.OffRoad).all():
-          #print(offroad.security_system)
-          offroad.security_system = True
-          #print(offroad)
       else:
         result_2 = session.query(mysql_models.OffRoad).filter_by(on_route = False).first()
         if (result != None) and (result_2 != None):
@@ -193,10 +189,13 @@ class Controllers:
           if result != None:
             alarm_status = "low"
      
-      alarm: mysql_models.Alarm = session.query(mysql_models.Alarm).get(alarm_id)
+      alarm: mysql_models.Alarm = session.query(mysql_models.Alarm).first()
       alarm.status = alarm_status
 
-      if alarm_status != "maximum":
+      if alarm_status != "normal" and alarm_status != "low":
+        for offroad in session.query(mysql_models.OffRoad).all():
+          offroad.security_system = True
+      else:
         for offroad in session.query(mysql_models.OffRoad).all():
           offroad.security_system = False
       
@@ -216,7 +215,7 @@ class Controllers:
       session.dirty
       session.commit()
       session.close()
-  
+    self.update_alarm()
     return {"status": "ok"}
     
   def delete_specie(self, specie_id):
@@ -227,7 +226,7 @@ class Controllers:
       session.dirty
       session.commit()
       session.close()
-  
+    self.update_alarm()
     return {"status": "ok"}
 
   def delete_enclosure(self, enclosue_id):
@@ -237,7 +236,7 @@ class Controllers:
       session.delete(enclosure)
       session.commit()
       session.close()
-  
+    self.update_alarm()
     return {"status": "ok"}
 
   def delete_offroad(self, offroad_id):
@@ -247,15 +246,5 @@ class Controllers:
       session.delete(offroad)
       session.commit()
       session.close()
-
-    return {"status": "ok"}
-
-  def delete_alarm(self, alarm_id):
-    db = DatabaseClient(gb.MYSQL_URL)
-    with Session(db.engine) as session:
-      alarm: mysql_models.Alarm = session.query(mysql_models.Alarm).get(alarm_id)
-      session.delete(alarm)
-      session.commit()
-      session.close()
-
+    self.update_alarm()
     return {"status": "ok"}
