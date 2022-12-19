@@ -9,7 +9,7 @@
     </tr>
     <tr v-for="item in off_roads" :key="item">
       <td>{{ item.id }}</td>
-      <td>{{ item.on_route }}</td>
+      <td>{{ item.on_route }} <q-btn v-if="item.on_route==false" round color="red" size="xs" v-on:click="switchStatus(item)" icon="toggle_off" /><q-btn v-if="item.on_route==true" round color="green" size="xs" v-on:click="switchStatus(item)" icon="toggle_on" /></td>
       <td>{{ item.n_visitors }}</td>
       <td>{{ item.security_system }}</td>
       <td align="center"><q-btn round color="red" size="xs" v-on:click="deleteOffRoad(item.id)" icon="delete_outline" /></td>
@@ -64,6 +64,17 @@
         },
         deleteOffRoad(id) {
           axios.get("http://localhost:8000/offroad/delete/"+id)
+          setTimeout(() => this.getOffRoads(), 500);
+        },
+        switchStatus: function (item) {
+          axios.post(
+            "http://localhost:8000/offroad/update?offroad_id="+item.id,
+            {on_route: !item.on_route,
+            n_visitors: item.n_visitors,
+            security_system: item.security_system
+          }).then((response) => {
+            this.response = JSON.stringify(response);
+          });
           setTimeout(() => this.getOffRoads(), 500);
         },
         submitForm: function () {
