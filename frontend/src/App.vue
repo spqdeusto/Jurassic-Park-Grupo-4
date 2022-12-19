@@ -57,7 +57,14 @@
       <q-page expand position="top">
         <q-toolbar class="JPARK__sticky q-px-xl">
           <q-space />
-            <marquee>Bienvenido al panel de Jurassic Park. Esto se trata de una prueba.</marquee>
+              <q-badge v-if="alarm=='normal'" color="green"><q-icon name="check_circle" />&nbsp;NORMAL</q-badge>
+              <q-badge v-if="alarm=='low'" color="yellow" text-color="brown"><q-icon name="warning" />&nbsp;LOW ALERT</q-badge>    
+              <q-badge v-if="alarm=='average'" color="orange"><q-icon name="warning" />&nbsp;AVERAGE ALERT</q-badge>    
+              <q-badge v-if="alarm=='maximum'" color="red"><q-icon name="warning" />&nbsp;MAXIMUM ALERT</q-badge> &nbsp;
+              <marquee>
+
+              Welcome to Jurassic Park administration panel.
+            </marquee>
         </q-toolbar>
 
         <q-card class="my-card" v-show="dinosaurs">
@@ -99,6 +106,8 @@ defineProps({
 
 <script>
 import { ref } from 'vue';
+import axios from 'axios';
+
 import Dinosaur from './components/Dinosaur.vue';
 import Specie from './components/Specie.vue';
 import Enclosure from './components/Enclosure.vue';
@@ -108,10 +117,11 @@ export default {
     name: "JurassicParkLayout",
     data(){
         return {
-           dinosaurs:true,
-           species:false,
-           enclosures:false,
-           offRoads:false
+          alarm:"",
+          dinosaurs:true,
+          species:false,
+          enclosures:false,
+          offRoads:false
         }
     },
     setup() {
@@ -125,6 +135,10 @@ export default {
       }
     },
     methods: {
+        async getAlarm () {
+          const response = await axios.get('http://localhost:8000/alarm/get')
+          this.alarm = response.data[0]['status']
+        },
         showDinosaurs: function() {
           this.hideAll()
           this.dinosaurs=true
@@ -154,6 +168,12 @@ export default {
       Specie, 
       Enclosure,
       OffRoad 
+    },
+    created() {
+      this.getAlarm()
+    },
+    mounted() {
+      setInterval(this.getAlarm,2500);
     }
 }
 </script>
@@ -207,6 +227,7 @@ export default {
     border-radius: 5px
     margin-right: 15px
     padding-right:200px
+    padding: 0px 15px
 
   &__sticky-help
     border: 1px solid #ccc
@@ -225,6 +246,11 @@ export default {
 
 .q-drawer
   background: transparent!important
+
+.q-badge
+  padding: 5px 10px
+  font-size: 16px
+  font-weight: bold!important
 
 .q-card
   background: rgb(64 45 39 / 67%)
