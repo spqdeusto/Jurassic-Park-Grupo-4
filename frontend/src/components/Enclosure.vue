@@ -3,14 +3,14 @@
     <tr>
       <th>Id</th>
       <th>Name</th>
-      <th>Status</th>
+      <th>Electric system status</th>
       <th>Actions</th>
     </tr>
     <tr v-for="item in enclosures" :key="item">
       <td>{{ item.id }}</td>
       <td><b>{{ item.name }}</b></td>
       <td>{{ item.status }}</td>
-      <td align="center"><q-btn round color="red" size="xs" v-on:click="deleteEnclosure(item.id)" icon="delete_outline" /></td>
+      <td align="center"><q-btn round color="orange" size="xs" v-on:click="switchStatus(item)" icon="alarm" />&nbsp;<q-btn round color="red" size="xs" v-on:click="deleteEnclosure(item.id)" icon="delete_outline" /></td>
     </tr>
   </table>
   <hr>
@@ -63,6 +63,16 @@ export default {
         axios.get("http://localhost:8000/enclosure/delete/"+id)
         setTimeout(() => this.getEnclosures(), 500);
     },
+    switchStatus: function (item) {
+      axios.post(
+        "http://localhost:8000/enclosure/update?enclosure_id="+item.id,
+        {name: item.name,
+        status: !item.status
+      }).then((response) => {
+        this.response = JSON.stringify(response);
+      });
+      setTimeout(() => this.getEnclosures(), 500);
+    },
     submitForm: function () {
       axios.post(
         "http://localhost:8000/enclosure/create",
@@ -70,7 +80,6 @@ export default {
         status: this.status
       }).then((response) => {
         this.response = JSON.stringify(response);
-        console.log(response);
       });
       setTimeout(() => this.getEnclosures(), 500);
     }
