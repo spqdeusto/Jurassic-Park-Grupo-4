@@ -195,8 +195,8 @@ async def update_alarm(alarm_id):
 
 # DELETE METHODS
 
-@app.post('/dinosaur/delete')
-async def delete_dinosaur(dinosaur_id):
+@app.get('/dinosaur/delete/{dinosaur_id}')
+async def delete_dinosaur(dinosaur_id: int):
   """! Es la función que llama a la base de datos para realizar una eliminación de un dinosaurio
 
   @param dinosaur_id se envia el identificador del dinosaurio
@@ -205,8 +205,8 @@ async def delete_dinosaur(dinosaur_id):
   """
   return controller.delete_dinosaur(dinosaur_id)
 
-@app.post('/specie/delete')
-async def delete_specie(specie_id):
+@app.get('/specie/delete/{specie_id}')
+async def delete_specie(specie_id: int):
   """! Es la función que llama a la base de datos para realizar una eliminación de una especie
 
   @param specie_id se envia el identificador del especie
@@ -215,8 +215,8 @@ async def delete_specie(specie_id):
   """
   return controller.delete_specie(specie_id)
 
-@app.post('/enclosure/delete')
-async def delete_enclosure(enclosure_id):
+@app.get('/enclosure/delete/{enclosure_id}')
+async def delete_enclosure(enclosure_id: int):
   """! Es la función que llama a la base de datos para realizar una eliminación de un recinto
 
   @param enclosure_id se envia el identificador del recinto
@@ -225,8 +225,8 @@ async def delete_enclosure(enclosure_id):
   """
   return controller.delete_enclosure(enclosure_id)
 
-@app.post('/offroad/delete')
-async def delete_offroad(offroad_id):
+@app.get('/offroad/delete/{offroad_id}')
+async def delete_offroad(offroad_id: int):
   """! Es la función que llama a la base de datos para realizar una eliminación de un todotorreno
 
   @param offroad_id se envia el identificador del todotorreno
@@ -235,8 +235,8 @@ async def delete_offroad(offroad_id):
   """
   return controller.delete_offroad(offroad_id)
 
-@app.post('/alarm/delete')
-async def delete_alarm(alarm_id):
+@app.get('/alarm/delete/{alarm_id}')
+async def delete_alarm(alarm_id: int):
   """! Es la función que llama a la base de datos para realizar una eliminación de una alarma
 
   @param alarm_id se envia el identificador de la alarma

@@ -1,7 +1,3 @@
-<script setup>
-import HelloWorld from './components/DinosaurGet.vue'
-</script>
-
 <template>
   <q-layout view="hHh LpR fFf" class="JPARK__bg">
     <q-header class="bg-transparent" reveal height-hint="60">
@@ -72,9 +68,7 @@ import HelloWorld from './components/DinosaurGet.vue'
 
         <q-card class="my-card" v-show="dinosaurs">
           <q-card-section>
-            <DinosaurGet></DinosaurGet>    <hr>
-
-            <DinosaurCreate></DinosaurCreate>
+            <Dinosaur></Dinosaur>
           </q-card-section>
         </q-card>
 
@@ -93,8 +87,7 @@ import HelloWorld from './components/DinosaurGet.vue'
 
 <script>
 import { ref } from 'vue';
-import DinosaurGet from './components/DinosaurGet.vue';
-import DinosaurCreate from './components/DinosaurCreate.vue';
+import Dinosaur from './components/Dinosaur.vue';
 import OffRoadCreate from './components/OffRoadCreate.vue';
 import OffRoadGet from './components/OffRoadGet.vue';
 export default {
@@ -142,8 +135,7 @@ export default {
         }
     },
     components: {
-      DinosaurGet, 
-      DinosaurCreate, 
+      Dinosaur, 
       OffRoadCreate, 
       OffRoadGet 
     }
