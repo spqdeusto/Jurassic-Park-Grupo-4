@@ -9,8 +9,8 @@
     <tr v-for="item in enclosures" :key="item">
       <td>{{ item.id }}</td>
       <td><b>{{ item.name }}</b></td>
-      <td>{{ item.status }}</td>
-      <td align="center"><q-btn round color="orange" size="xs" v-on:click="switchStatus(item)" icon="alarm" />&nbsp;<q-btn round color="red" size="xs" v-on:click="deleteEnclosure(item.id)" icon="delete_outline" /></td>
+      <td>{{ item.status }} <q-btn v-if="item.status==false" round color="red" size="xs" v-on:click="switchStatus(item)" icon="toggle_off" /><q-btn v-if="item.status==true" round color="green" size="xs" v-on:click="switchStatus(item)" icon="toggle_on" /></td>
+      <td align="center"><q-btn round color="red" size="xs" v-on:click="deleteEnclosure(item.id)" icon="delete_outline" /></td>
     </tr>
   </table>
   <hr>

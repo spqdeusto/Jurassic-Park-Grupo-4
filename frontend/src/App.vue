@@ -235,6 +235,7 @@ export default {
 
 table
   width: 100%
+  background: rgba(0 0 0 / 25%)
   border: 6px solid rgb(255 255 255 / 10%)
 
 td
