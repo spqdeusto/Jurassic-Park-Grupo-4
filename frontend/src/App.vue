@@ -87,7 +87,7 @@
 
         <q-card class="my-card" v-show="offRoads">
           <q-card-section>
-            <OffRoad></OffRoad>
+            <OffRoad ref="fooTwo"></OffRoad>
           </q-card-section>
         </q-card>
       </q-page>
@@ -155,6 +155,7 @@ export default {
         showOffRoads: function() {
           this.hideAll()
           this.offRoads=true
+          this.$refs.fooTwo.getOffRoads()
         },
         hideAll: function() {
           this.dinosaurs=false
