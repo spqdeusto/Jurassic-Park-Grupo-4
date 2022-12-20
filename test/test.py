@@ -21,41 +21,60 @@ class testCase(unittest.TestCase):
             "dangerousness": "peaceful",
             "enclosure_id": 1
         }
-        
         x = requests.post(url, json = myobj)
 
-        x = requests.get('http://localhost:8000/dinosaur/create')
-        jsonResponse = x.json()[0]
+        x = requests.get('http://localhost:8000/dinosaur/get_all')
+        jsonResponse = x.json()
+        last = jsonResponse[len(jsonResponse)-1]
 
-        if (x.status_code == 200):
-            assert x.status_code == 200
-            print ("CREATE DINOSAUR TEST PASSED")
+        self.assertTrue(last['name'] == 'dinosaurX')
 
-        if (x.status_code != 200):
-            print ("CREATE DINOSAUR TEST NOT PASSED")
-            print (x.status_code)  
+    def test_create_specie(self):
+        url = 'http://localhost:8000/specie/create'
+        myobj = {
+            "name": "specieX"
+        }
+        x = requests.post(url, json = myobj)
 
+        x = requests.get('http://localhost:8000/specie/get_all')
+        jsonResponse = x.json()
+        last = jsonResponse[len(jsonResponse)-1]
+
+        self.assertTrue(last['name'] == 'specieX')
+
+    def test_create_enclosure(self):
+        url = 'http://localhost:8000/enclosure/create'
+        myobj = {
+            "name": "enclosureX",
+            "status": True
+        }
+        x = requests.post(url, json = myobj)
+
+        x = requests.get('http://localhost:8000/enclosure/get_all')
+        jsonResponse = x.json()
+        last = jsonResponse[len(jsonResponse)-1]
+
+        self.assertTrue(last['name'] == 'enclosureX')
+
+
+    def test_create_offroad(self):
+        x = requests.get('http://localhost:8000/offroad/get_all')
+        jsonResponse = x.json()
+        firstLen = len(jsonResponse)
+
+        url = 'http://localhost:8000/offroad/create'
+        myobj = {
+            "on_route": True,
+            "n_visitors": 1,
+            "security_system": False
+        }
+        x = requests.post(url, json = myobj)
+
+        x = requests.get('http://localhost:8000/offroad/get_all')
+        jsonResponse = x.json()
+        secondLen = len(jsonResponse)
+
+        self.assertTrue(firstLen+1 == secondLen)
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-
-
-#from typing import Union
-#from app.controllers.handler import Controllers
-#from app.mysql.mysql import DatabaseClient
-
-#import app.utils.vars as gb
-#import app.models.models as models
-
-#class test(unittest.TestCase):
-
-    #def create_dinosaur(self):
-        #dinoTest = ["Test",1,20,20,"male","peaceful","1"]
-        #Controllers.create_dinosaur(dinoTest)
-        #dinosaurs = Controllers.get_dinosaurs(self)
-        #self.assertTrue(dinoTest)
-        
