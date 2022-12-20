@@ -23,4 +23,12 @@
  @licend  The above is the entire license notice for the JavaScript code in this file
 */
 var menudata={children:[
-{text:"Página principal",url:"index.html"}]}
+{text:"Página principal",url:"index.html"},
+{text:"Paquetes",url:"namespaces.html",children:[
+{text:"Package List",url:"namespaces.html"},
+{text:"Miembros del 'package'",url:"namespacemembers.html",children:[
+{text:"Todo",url:"namespacemembers.html"},
+{text:"Funciones",url:"namespacemembers_func.html"},
+{text:"Variables",url:"namespacemembers_vars.html"}]}]},
+{text:"Archivos",url:"files.html",children:[
+{text:"Lista de archivos",url:"files.html"}]}]}
