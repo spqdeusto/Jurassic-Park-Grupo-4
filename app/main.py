@@ -29,17 +29,16 @@ origins = ["*"]
 
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=origins, # Allows all origins
+  allow_origins=origins,
   allow_credentials=True,
-  allow_methods=["*"], # Allows all methods
-  allow_headers=["*"], # Allows all headers
+  allow_methods=["*"],
+  allow_headers=["*"],
 )
 
 initialize()
 
 controller = Controllers()
 
-""" controller.delete_alarms() """
 if controller.get_alarm() == []:
   body=models.Alarm
   body.status = "normal"
