@@ -39,6 +39,12 @@ initialize()
 
 controller = Controllers()
 
+""" controller.delete_alarms() """
+if controller.get_alarm() == []:
+  body=models.Alarm
+  body.status = "normal"
+  controller.create_alarm(body)
+
 # CREATE METHODS
 
 @app.post('/dinosaur/create')

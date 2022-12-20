@@ -59,7 +59,7 @@ class Controllers:
       session.add(body_row)
       session.commit()
       session.close()
-
+    self.update_alarm()
     return {"status": "ok"}
 
 
@@ -247,4 +247,14 @@ class Controllers:
       session.commit()
       session.close()
     self.update_alarm()
+    return {"status": "ok"}
+
+  def delete_alarms(self):
+    db = DatabaseClient(gb.MYSQL_URL)
+    with Session(db.engine) as session:
+      alarms: mysql_models.Alarm = session.query(mysql_models.Alarm).all()
+      for alarm in alarms:
+        session.delete(alarm)
+      session.commit()
+      session.close()
     return {"status": "ok"}
