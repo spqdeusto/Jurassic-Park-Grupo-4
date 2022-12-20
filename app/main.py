@@ -215,7 +215,7 @@ async def delete_enclosure(enclosure_id: int):
 
   @param enclosure_id se envia el identificador del recinto
 
-  @return devuelve un "ok", para aceptar la eliminación del recinto
+  @return devuelve un "ok", para aceptar la eliminacion del recinto
   """
   return controller.delete_enclosure(enclosure_id)
 
@@ -225,6 +225,6 @@ async def delete_offroad(offroad_id: int):
 
   @param offroad_id se envia el identificador del todotorreno
 
-  @return devuelve un "ok", para aceptar la eliminacion del todotorreno
+  @return devuelve un "ok", para aceptar la eliminacin del todotorreno
   """
   return controller.delete_offroad(offroad_id)
