@@ -48,7 +48,7 @@ if controller.get_alarm() == []:
 
 @app.post('/dinosaur/create')
 async def create_dinosaur(body: models.Dinosaur): 
-  """! Es la función que crea el metodo para generar dinosaurios
+  """! Es la funcion que crea el metodo para generar dinosaurios
   
   @param body: Dinosaur se envia los parametros que configura un dinosaurio
 
@@ -58,7 +58,7 @@ async def create_dinosaur(body: models.Dinosaur):
 
 @app.post('/specie/create')
 async def create_specie(body: models.Specie): 
-  """! Es la función que crea el metodo para generar especies
+  """! Es la funcion que crea el metodo para generar especies
   
   @param body: Specie se envia los parametros que configuran las especie
 
@@ -68,7 +68,7 @@ async def create_specie(body: models.Specie):
 
 @app.post('/enclosure/create')
 async def create_enclosure(body: models.Enclosure):
-  """! Es la función que crea el metodo para generar recintos
+  """! Es la funcion que crea el metodo para generar recintos
   
   @param body: Enclosure se envia los parametros que configuran el recinto
 
@@ -78,7 +78,7 @@ async def create_enclosure(body: models.Enclosure):
 
 @app.post('/offroad/create')
 async def create_offroad(body: models.OffRoad): 
-  """! Es la función que crea el metodo para generar todoterrenos
+  """! Es la funcion que crea el metodo para generar todoterrenos
   
   @param body: OffRoad se envia los parametros que configuran el todoterreno
 
@@ -88,7 +88,7 @@ async def create_offroad(body: models.OffRoad):
 
 @app.post('/alarm/create')
 async def create_alarm(body: models.Alarm): 
-  """! Es la función que crea el metodo para generar alarmas
+  """! Es la funcion que crea el metodo para generar alarmas
   
   @param body: Alarm se envia los parametros que configuran la alarma
 
@@ -101,7 +101,7 @@ async def create_alarm(body: models.Alarm):
 
 @app.get('/dinosaur/get_all')
 async def get_Dinosaurs():
-  """! Es la función que llama a la base de datos para obtener el dinosaurio
+  """! Es la funcion que llama a la base de datos para obtener el dinosaurio
 
   @return devuelve los dinosaurios de la base de datos   
   """ 
@@ -109,7 +109,7 @@ async def get_Dinosaurs():
 
 @app.get('/specie/get_all')
 async def get_Species():
-  """! Es la función que llama a la base de datos para obtener las especies
+  """! Es la funcion que llama a la base de datos para obtener las especies
 
   @return devuelve las especies de la base de datos   
   """ 
@@ -117,7 +117,7 @@ async def get_Species():
 
 @app.get('/enclosure/get_all')
 async def get_Enclosures():
-  """! Es la función que llama a la base de datos para obtener los recintos
+  """! Es la funcion que llama a la base de datos para obtener los recintos
 
   @return devuelve los recintos de la base de datos   
   """ 
@@ -125,7 +125,7 @@ async def get_Enclosures():
 
 @app.get('/offroad/get_all')
 async def get_offroads():
-  """! Es la función que llama a la base de datos para obtener los todoterrenos
+  """! Es la funcion que llama a la base de datos para obtener los todoterrenos
 
   @return devuelve los todoterrenos de la base de datos   
   """ 
@@ -133,7 +133,7 @@ async def get_offroads():
 
 @app.get('/alarm/get')
 async def get_alarm():
-  """! Es la función que llama a la base de datos para obtener la alarma
+  """! Es la funcion que llama a la base de datos para obtener la alarma
 
   @return devuelve las alarmas de la base de datos   
   """ 
@@ -144,45 +144,45 @@ async def get_alarm():
 
 @app.post('/dinosaur/update')
 async def update_dinosaur(dinosaur_id, body: models.Dinosaur):
-  """! Es la función que llama a la base de datos para realizar una actualización en un dinosaurio
+  """! Es la funcion que llama a la base de datos para realizar una actualizacion en un dinosaurio
 
   @param dinosaur_id es el indentificador de un dinosaurio
-  @param body: Dinosaur contiene los nuevos atributos para la actualización
+  @param body: Dinosaur contiene los nuevos atributos para la actualizacion
 
-  @return devuelve el identificador del dinosaurio y la nueva información  
+  @return devuelve el identificador del dinosaurio y la nueva informacion  
   """ 
   return controller.update_dinosaur(dinosaur_id, body)
 
 @app.post('/specie/update')
 async def update_specie(specie_id, body: models.Specie):
-  """! Es la función que llama a la base de datos para realizar una actualización una especie
+  """! Es la funcion que llama a la base de datos para realizar una actualizacion una especie
 
   @param specie_id es el indentificador de una especie
-  @param body: Specie contiene los nuevos atributos para la actualización
+  @param body: Specie contiene los nuevos atributos para la actualizacion
 
-  @return devuelve el identificador de la especie y la nueva información  
+  @return devuelve el identificador de la especie y la nueva informacion  
   """ 
   return controller.update_specie(specie_id, body)
 
 @app.post('/enclosure/update')
 async def update_enclosure(enclosure_id, body: models.Enclosure):
-  """! Es la función que llama a la base de datos para realizar una actualización del recinto
+  """! Es la funcion que llama a la base de datos para realizar una actualizacion del recinto
 
   @param enclosure_id es el indentificador de un recinto
-  @param body: Enclosure contiene los nuevos atributos para la actualización
+  @param body: Enclosure contiene los nuevos atributos para la actualizacion
 
-  @return devuelve el identificador del recinto y la nueva información  
+  @return devuelve el identificador del recinto y la nueva informacion  
   """ 
   return controller.update_enclosure(enclosure_id, body)
 
 @app.post('/offroad/update')
 async def update_offroad(offroad_id, body: models.OffRoad):
-  """! Es la función que llama a la base de datos para realizar una actualización del todoterreno
+  """! Es la funcion que llama a la base de datos para realizar una actualizacion del todoterreno
 
   @param offroad_id es el indentificador de un todoterreno
-  @param body: OffRoad contiene los nuevos atributos para la actualización
+  @param body: OffRoad contiene los nuevos atributos para la actualizacion
 
-  @return devuelve el identificador del todoterreno y la nueva información  
+  @return devuelve el identificador del todoterreno y la nueva informacion  
   """
   return controller.update_offroad(offroad_id, body)
 
@@ -191,27 +191,27 @@ async def update_offroad(offroad_id, body: models.OffRoad):
 
 @app.get('/dinosaur/delete/{dinosaur_id}')
 async def delete_dinosaur(dinosaur_id: int):
-  """! Es la función que llama a la base de datos para realizar una eliminación de un dinosaurio
+  """! Es la funcion que llama a la base de datos para realizar una eliminacion de un dinosaurio
 
   @param dinosaur_id se envia el identificador del dinosaurio
 
-  @return devuelve un "ok", para aceptar la eliminación del usuario
+  @return devuelve un "ok", para aceptar la eliminacion del usuario
   """
   return controller.delete_dinosaur(dinosaur_id)
 
 @app.get('/specie/delete/{specie_id}')
 async def delete_specie(specie_id: int):
-  """! Es la función que llama a la base de datos para realizar una eliminación de una especie
+  """! Es la funcion que llama a la base de datos para realizar una eliminacion de una especie
 
   @param specie_id se envia el identificador del especie
 
-  @return devuelve un "ok", para aceptar la eliminación de la especie
+  @return devuelve un "ok", para aceptar la eliminacion de la especie
   """
   return controller.delete_specie(specie_id)
 
 @app.get('/enclosure/delete/{enclosure_id}')
 async def delete_enclosure(enclosure_id: int):
-  """! Es la función que llama a la base de datos para realizar una eliminación de un recinto
+  """! Es la funcion que llama a la base de datos para realizar una eliminacion de un recinto
 
   @param enclosure_id se envia el identificador del recinto
 
@@ -221,10 +221,10 @@ async def delete_enclosure(enclosure_id: int):
 
 @app.get('/offroad/delete/{offroad_id}')
 async def delete_offroad(offroad_id: int):
-  """! Es la función que llama a la base de datos para realizar una eliminación de un todotorreno
+  """! Es la funcion que llama a la base de datos para realizar una eliminacion de un todotorreno
 
   @param offroad_id se envia el identificador del todotorreno
 
-  @return devuelve un "ok", para aceptar la eliminación del todotorreno
+  @return devuelve un "ok", para aceptar la eliminacion del todotorreno
   """
   return controller.delete_offroad(offroad_id)
